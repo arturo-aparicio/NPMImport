@@ -28,7 +28,7 @@ for package in package_names:
     json = response.json()
     if not 'versions' in json:
         print "    No versions for this package"
-        break
+        continue
     versions = json['versions']
     for version, version_info in versions.iteritems():
     	print "    Working on version: " + version
