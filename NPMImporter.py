@@ -25,7 +25,11 @@ for package in package_names:
     # Perform the query
     response = requests.get(URL + '/' + package, auth=(SINOPIA_USER_NAME, SINOPIA_PASSWORD))
     # For each version, download the package
-    versions = response.json()['versions']
+    json = response.json()
+    if not 'versions' in json:
+        print "    No versions for this package"
+        break
+    versions = json['versions']
     for version, version_info in versions.iteritems():
     	print "    Working on version: " + version
         tar_path = version_info['dist']['tarball']
